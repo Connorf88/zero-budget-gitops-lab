@@ -1,0 +1,24 @@
+- name: Check if Docker is installed
+  command: which docker
+  register: docker_check
+  ignore_errors: true
+
+- name: Warn if Docker is not installed
+  debug:
+    msg: "⚠️ Docker is not installed. Please install Docker Desktop 
+manually."
+  when: docker_check.rc != 0
+
+- name: Check if kind is installed
+  command: which kind
+  register: kind_check
+  ignore_errors: true
+
+- name: Install kind if missing
+  get_url:
+    url: https://kind.sigs.k8s.io/dl/v0.22.0/kind-darwin-amd64
+    dest: /usr/local/bin/kind
+    mode: '0755'
+  when: kind_check.rc != 0
+
+

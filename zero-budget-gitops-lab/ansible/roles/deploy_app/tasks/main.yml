@@ -1,0 +1,9 @@
+- name: Deploy app deployment
+  command: kubectl apply -f k8s/base/app-deployment.yaml
+  args:
+    chdir: /Users/connorfleming/zero-budget-gitops-lab
+- name: Deploy app service
+  command: kubectl apply -f k8s/base/app-service.yaml
+  args:
+    chdir: /Users/connorfleming/zero-budget-gitops-lab
+
